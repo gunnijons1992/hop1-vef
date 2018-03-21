@@ -91,9 +91,29 @@ async function readOne(id) {
   }
 }
 
+async function searchBy(query){
+  const client = new Client({
+     user: 'postgres',
+     host: 'localhost',
+     database: 'hinriksteinar',
+     password: 'postgres',
+   });
+   await client.connect();
 
+   try {
 
+     const result = await client.query('SELECT * FROM books WHERE to_tsvector(title || \' \' || description) '+
+     '@@ to_tsquery(\'' + query + '\')');
 
+     const { rows } = result;
+     return rows;
+
+   } catch (e) {
+      throw e
+   } finally {
+     await client.end();
+   }
+}
 
 
 module.exports = {
@@ -101,5 +121,5 @@ module.exports = {
   readAll,
   readCategories,
   readOne,
-  //del,
+  searchBy,
 };
