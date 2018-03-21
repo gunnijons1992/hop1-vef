@@ -1,12 +1,19 @@
+const { Client } = require('pg');
+
+const connectionString = process.env.DATABASE_URL || 'postgres://:@localhost/hinriksteinar';
 
 
-
-/*async function readAll() {
-  const client = new Client({ connectionString });
-  await client.connect();
+async function readAll() {
+  const client = new Client({
+     user: 'postgres',
+     host: 'localhost',
+     database: 'hinriksteinar',
+     password: 'postgres',
+   });
+ await client.connect();
 
   try {
-    const result = await client.query('SELECT * FROM books [ ORDER BY bookId ] [ LIMIT { 10 } ] [ OFFSET 0 ]');
+    const result = await client.query('SELECT * FROM books ORDER BY id LIMIT 10 OFFSET 0');
 
     const { rows } = result;
     return rows;
@@ -17,4 +24,12 @@
     await client.end();
   }
 }
-*/
+
+
+module.exports = {
+  //create,
+  readAll,
+  //readOne,
+  //update,
+  //del,
+};
