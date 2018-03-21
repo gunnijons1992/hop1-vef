@@ -8,6 +8,7 @@ const converter = new Converter({});
 const connectionString = 'postgres://postgres:@localhost/hinriksteinar';
 
 
+
  converter.fromFile("./data/books.csv",async function(err,result){
     // if an error has occured then handle it
     if(err){
@@ -66,7 +67,6 @@ const connectionString = 'postgres://postgres:@localhost/hinriksteinar';
     }
     await client.end();
   }
-
 
 
 createCategories(json);
