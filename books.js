@@ -1,15 +1,3 @@
-const { Client } = require('pg')
-
-const connectionString = 'postgres://postgres:@localhost/hinriksteinar';
-
-const client = new Client({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'hinriksteinar',
-  password: 'postgres',
-});
-
-client.connect();
 
 
 
